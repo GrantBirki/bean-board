@@ -13,7 +13,7 @@ The UI to upload images to Daniel's bean-board!
 To run locally with Python, just do the following:
 
 ```bash
-python3 app/app.py
+python3 app.py
 ```
 
 ### Docker 🐳
