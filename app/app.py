@@ -1,37 +1,52 @@
-from flask import Flask, render_template, jsonify, request, make_response
+from flask import Flask, render_template, jsonify, request, make_response, redirect
+import requests
+from os import environ
+import os
+from flask import Flask, flash, request, redirect, url_for
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = "./app/uploads"
+ALLOWED_EXTENSIONS = {"webm", "png", "jpg", "jpeg", "gif", "mp4"}
 
 app = Flask(__name__)
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # limit to 16MB
 
-@app.route('/button')
-def button():
-	return render_template('button.html')
 
-@app.route('/basic')
-def basic():
-	return render_template('basic.html')
-
-@app.route('/api/button', methods=['POST'])
-def api_button():
-	try:
-		data = request.json
-		is_enabled = data['enabled']
-	except KeyError:
-		return make_response(jsonify({"status": "bad request"}), 400)
-
-	if is_enabled:
-		return jsonify({"status": "success", "state": "enabled"})
-	else:
-		return jsonify({"status": "success", "state": "disabled"})
-
-# Default endpoints
-
-@app.route('/')
-def hello():
-	return "Hello World!"
-
-@app.route('/health-check')
+@app.route("/health-check")
 def health_check():
-	return "ok"
+    return "ok"
 
-if __name__ == '__main__':
-	app.run(host='0.0.0.0')
+
+@app.route("/")
+def hello():
+    return render_template("index.html")
+
+
+def allowed_file(filename):
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@app.route("/bean-board", methods=["GET", "POST"])
+def upload_file():
+    if request.method == "POST":
+        # check if the post request has the file part
+        if "file" not in request.files:
+            flash("No file part")
+            return redirect(request.url)
+        file = request.files["file"]
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == "":
+            flash("No selected file")
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            return "uploaded!"
+    else:
+        return render_template("bean-board.html")
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")

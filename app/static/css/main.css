@@ -1,3 +1,7 @@
+p {
+    color: #ccc;
+}
+
 .info-upper {
     padding-top: 3%;
 }
@@ -30,15 +34,16 @@
     margin-left: auto;
     margin-right: auto;
 }
-.box-main-bg{
+.box-main-bg {
     background-color: #2C2C2E;
 }
-.box-main{
+.box-main {
+    margin-top: 3%;
     margin-left: auto;
     margin-right: auto;
     width: 40%;
 }
-.rounded-box{
+.rounded-box {
     border-radius: 0.5rem;
     margin-left: auto;
     margin-right: auto;

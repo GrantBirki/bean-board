@@ -3,14 +3,9 @@ FROM python:3.9.6-alpine3.14
 # permissions and nonroot user for tightened security
 RUN adduser -D nonroot
 
-# install curl
-RUN apk add curl
-
-# create file strcuture
 RUN mkdir /home/app/ && chown -R nonroot:nonroot /home/app
 RUN mkdir -p /var/log/flask-app && touch /var/log/flask-app/flask-app.err.log && touch /var/log/flask-app/flask-app.out.log
 
-# assign permissions to flask-app
 RUN chown -R nonroot:nonroot /var/log/flask-app
 WORKDIR /home/app
 USER nonroot
