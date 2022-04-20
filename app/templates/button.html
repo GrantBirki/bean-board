@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}button - example{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/button.css')}}">
+{% endblock %}
+
+{% block body %}
+    <!-- particles.js container -->
+    <div id="particles-js"></div>
+    <script src="{{url_for('static', filename='js/particle.min.js')}}"></script>
+
+    <div class="center-div">
+        <div class="rounded-box box-main-bg">
+            <h1 class="info-upper">Status:</h1>
+            <h1 class="ok-lower info-lower info-upper" id="main-status">Enabled</h2>
+        </div>
+        <div class="box-main">
+            <button class="dark-button dark-button-1 ok" id="enable"><span class="button-text">Enable</span></button>
+            <button class="dark-button dark-button-2 error" id="disable"><span class="button-text">Disable</span></button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script_lower %}
+    <script src="{{url_for('static', filename='js/particle.js')}}"></script>
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    <script src="{{url_for('static', filename='js/buttons.js')}}"></script>
+{% endblock %}

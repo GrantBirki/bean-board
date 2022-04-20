@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}basic - example{% endblock %}
+{% block head %}
+    <!-- Extra Head Stuffs Here -->
+{% endblock %}
+
+{% block body %}
+    <!-- particles.js container -->
+    <div id="particles-js"></div>
+    <script src="{{url_for('static', filename='js/particle.min.js')}}"></script>
+{% endblock %}
+
+{% block script_lower %}
+    <script src="{{url_for('static', filename='js/particle.js')}}"></script>
+{% endblock %}
