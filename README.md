@@ -26,3 +26,13 @@ Then browse to:
 
 - `localhost/button`
 - `localhost/basic`
+
+## Manual Deployment 🚀
+
+In the future, commits to this repo will automatically trigger a deployment to production in Heroku. For now, you can manually deploy by running the following commands:
+
+```bash
+heroku login # login
+heroku git:remote -a bean-board # maybe needed (try without first)
+git push heroku main # deploy
+```
