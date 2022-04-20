@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}success{% endblock %}
+
+{% block body %}
+
+<div class="blankslate blankslate-large blankslate-spacious">
+    <div class="d-flex flex-justify-center mt-2">
+        <div class="success-checkmark">
+            <div class="check-icon">
+                <span class="icon-line line-tip"></span>
+                <span class="icon-line line-long"></span>
+                <div class="icon-circle"></div>
+                <div class="icon-fix"></div>
+            </div>
+        </div>
+    </div>
+    <h2 class="mb-1">Upload successful!</h2>
+</div>
+
+<div class="mt-4">
+    <div class="d-flex flex-column flex-justify-center flex-items-center text-center height-full">
+        <div class="d-flex flex-justify-center mt-2">
+            <a href="/" class="btn btn-large btn-outline mr-2">
+                Submit another
+            </a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
