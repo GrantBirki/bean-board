@@ -8,6 +8,8 @@ The UI to upload images to Daniel's bean-board!
 
 ## Usage 🔨
 
+The following steps include usage for building the app locally for development
+
 ### Python 🐍
 
 To run locally with Python, just do the following:
@@ -17,6 +19,8 @@ python3 app.py
 ```
 
 ### Docker 🐳
+
+To run locally with Docker, just do the following:
 
 ```bash
 make run
