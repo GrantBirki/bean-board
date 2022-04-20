@@ -18,16 +18,11 @@ def health_check():
     return "ok"
 
 
-@app.route("/")
-def hello():
-    return render_template("index.html")
-
-
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route("/bean-board", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def upload_file():
     if request.method == "POST":
         # check if the post request has the file part
@@ -45,7 +40,7 @@ def upload_file():
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
             return "uploaded!"
     else:
-        return render_template("bean-board.html")
+        return render_template("index.html")
 
 
 if __name__ == "__main__":
