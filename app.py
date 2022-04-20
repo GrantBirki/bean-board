@@ -1,3 +1,4 @@
+import boto3 as boto3
 from flask import Flask, render_template, jsonify, request, make_response, redirect
 import requests
 from os import environ
@@ -7,6 +8,10 @@ from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = "./uploads"
 ALLOWED_EXTENSIONS = {"webm", "png", "jpg", "jpeg", "gif", "mp4"}
+SESSION = boto3.Session(
+    aws_access_key_id=os.environ['S3_KEY'],
+    aws_secret_access_key=os.environ['S3_SECRET'],
+    region_name='us-east-2')
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -36,7 +41,13 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            file.save(filepath)
+            s3 = SESSION.resource('s3')
+            BUCKET = "test-bean-board-bucket"
+            s3.Bucket(BUCKET).upload_file(filepath, filename)
+            os.remove(filepath)
+
             return render_template("success.html")
     else:
         return render_template("index.html")
