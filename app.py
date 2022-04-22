@@ -11,8 +11,8 @@ UPLOAD_FOLDER = "./uploads"
 ALLOWED_EXTENSIONS = {"webm", "png", "jpg", "jpeg", "gif", "mp4", "mkv", "m4v"}
 
 SESSION = boto3.Session(
-    aws_access_key_id="AKIA5NYOBKMMXUNKAXY4",
-    aws_secret_access_key="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",
+    aws_access_key_id=os.environ['S3_KEY'],
+    aws_secret_access_key=os.environ['S3_SECRET'],
     region_name='us-east-2')
 
 app = Flask(__name__)
