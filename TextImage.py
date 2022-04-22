@@ -19,7 +19,7 @@ class TextImage(object):
 		font = ImageFont.truetype("arial.ttf", size)
 
 		while True:
-			if font.getsize(self.text) < img.size or size == 8:
+			if font.getsize(self.text) < img.size or size == 12:
 				break
 			size -= 1
 			font = ImageFont.truetype("arial.ttf", size)
