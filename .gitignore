@@ -2,3 +2,4 @@ creds*
 .vscode
 uploads/
 !.gitkeep
+__pycache__
