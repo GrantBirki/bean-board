@@ -18,6 +18,12 @@ To run locally with Python, just do the following:
 python3 app.py
 ```
 
+You can also use live reload to preview your changes faster and not have to restart the app after every change:
+
+```bash
+FLASK_ENV=development flask run
+```
+
 ### Docker 🐳
 
 To run locally with Docker, just do the following:
