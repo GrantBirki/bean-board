@@ -1,6 +1,6 @@
 import os
 from PIL import Image, ImageFont, ImageDraw
-from string import ascii_letters
+from urllib.request import urlopen
 import textwrap
 from werkzeug.utils import secure_filename
 
@@ -16,13 +16,14 @@ class TextImage(object):
 	def text_to_image(self):
 		img = Image.new("RGB", (256, 128))
 		size = 96
-		font = ImageFont.truetype("arial.ttf", size)
+		truetype_url = 'https://github.com/googlefonts/roboto/blob/main/src/hinted/Roboto-Regular.ttf?raw=true'
+		font = ImageFont.truetype(urlopen(truetype_url), size)
 
 		while True:
 			if font.getsize(self.text) < img.size or size == 12:
 				break
 			size -= 1
-			font = ImageFont.truetype("arial.ttf", size)
+			font = ImageFont.truetype(urlopen(truetype_url), size)
 
 		draw = ImageDraw.Draw(im=img)
 		words = textwrap.fill(text=self.text, width=95, break_long_words=False)
